@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "categories/show"
-  get "products/index"
-  get "products/show"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   ActiveAdmin.routes(self)
@@ -10,4 +7,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
+
+  resource :cart, only: [:show]
+  post "cart/add/:id", to: "cart#add", as: "add_to_cart"
 end
