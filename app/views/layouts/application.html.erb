@@ -13,6 +13,15 @@
 
   <body>
     <%= render "shared/navbar" %>
+
+    <div class="container">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-info mt-3">
+          <%= message %>
+        </div>
+     <% end %>
+   </div>
+
     <%= yield %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
