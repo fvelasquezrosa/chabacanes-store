@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="mb-4">Shopping Cart</h1>
+
+  <% if @cart_items.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Line Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% grand_total = 0 %>
+        <% @cart_items.each do |item| %>
+          <% line_total = item[:product].price * item[:quantity] %>
+          <% grand_total += line_total %>
+          <tr>
+            <td><%= item[:product].title %></td>
+            <td>$<%= item[:product].price %></td>
+            <td><%= item[:quantity] %></td>
+            <td>$<%= line_total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h4>Grand Total: $<%= grand_total %></h4>
+  <% else %>
+    <p>Your cart is empty.</p>
+  <% end %>
+
+  <%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
+</div>
