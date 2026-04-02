@@ -15,7 +15,8 @@
       <p><strong>Stock:</strong> <%= @product.stock_quantity %></p>
       <p><%= @product.description %></p>
 
-      <%= link_to "Back to Products", root_path, class: "btn btn-secondary" %>
+      <%= button_to "Add to Cart", add_to_cart_path(@product), method: :post, class: "btn btn-success" %>
+      <%= link_to "Back to Products", root_path, class: "btn btn-secondary ms-2" %>
     </div>
   </div>
 </div>
