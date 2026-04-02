@@ -1,5 +1,7 @@
 <div class="container">
-  <h1 class="mb-4">Shop All Products</h1>
+  <h1 class="mb-4">
+    <%= @category.present? ? "#{@category.name} Products" : "Shop All Products" %>
+  </h1>
 
   <div class="row">
     <% @products.each do |product| %>
