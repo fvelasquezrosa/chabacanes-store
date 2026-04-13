@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   # Cart (Session-based)
   get "/cart", to: "cart#show", as: "cart"
   post "/cart/add/:id", to: "cart#add", as: "add_to_cart"
+  patch "/cart/update/:id", to: "cart#update", as: "update_cart"
+  delete "/cart/remove/:id", to: "cart#remove", as: "remove_from_cart"
 
   # Static Pages
   get "/pages/:slug", to: "pages#show", as: "page"
