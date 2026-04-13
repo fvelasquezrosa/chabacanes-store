@@ -64,3 +64,4 @@ gem "kaminari"
 gem "image_processing", "~> 1.2"
 gem "sassc-rails"
 gem "sassc"
+gem 'faker'
