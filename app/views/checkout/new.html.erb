@@ -1,0 +1,92 @@
+<div class="container">
+  <h1 class="mb-4">Checkout</h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Customer Information</h3>
+
+      <%= form_with url: checkout_path, method: :post, local: true do %>
+        <div class="mb-3">
+          <%= label_tag :email, "Email", class: "form-label" %>
+          <%= email_field_tag :email, nil, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= label_tag :first_name, "First Name", class: "form-label" %>
+          <%= text_field_tag :first_name, nil, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= label_tag :last_name, "Last Name", class: "form-label" %>
+          <%= text_field_tag :last_name, nil, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= label_tag :address, "Address", class: "form-label" %>
+          <%= text_field_tag :address, nil, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= label_tag :city, "City", class: "form-label" %>
+          <%= text_field_tag :city, nil, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= label_tag :postal_code, "Postal Code", class: "form-label" %>
+          <%= text_field_tag :postal_code, nil, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= label_tag :province_id, "Province", class: "form-label" %>
+          <%= select_tag :province_id,
+                options_from_collection_for_select(@provinces, :id, :name, params[:province_id]),
+                include_blank: "Select Province",
+                class: "form-select",
+                required: true %>
+        </div>
+
+        <%= submit_tag "Place Order", class: "btn btn-success" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Invoice Summary</h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Line Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |item| %>
+            <tr>
+              <td><%= item[:product].title %></td>
+              <td><%= item[:quantity] %></td>
+              <td>$<%= item[:product].price * item[:quantity] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <p><strong>Subtotal:</strong> $<%= @subtotal %></p>
+      <p><strong>GST:</strong> $<%= @gst_amount %></p>
+      <p><strong>PST:</strong> $<%= @pst_amount %></p>
+      <p><strong>HST:</strong> $<%= @hst_amount %></p>
+      <p><strong>Total:</strong> $<%= @total %></p>
+
+      <%= form_with url: checkout_path, method: :get, local: true do %>
+        <div class="mb-3">
+          <%= label_tag :province_id, "Preview Taxes by Province", class: "form-label" %>
+          <%= select_tag :province_id,
+                options_from_collection_for_select(@provinces, :id, :name, params[:province_id]),
+                include_blank: "Select Province",
+                class: "form-select" %>
+        </div>
+        <%= submit_tag "Update Invoice", class: "btn btn-outline-dark btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>

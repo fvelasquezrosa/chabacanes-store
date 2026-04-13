@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="mb-4">Order Confirmation</h1>
+
+  <p><strong>Order ID:</strong> <%= @order.id %></p>
+  <p><strong>Status:</strong> <%= @order.status %></p>
+  <p><strong>Customer:</strong> <%= @order.user.first_name %> <%= @order.user.last_name %></p>
+  <p><strong>Email:</strong> <%= @order.user.email %></p>
+  <p><strong>Address:</strong> <%= @order.user.address %>, <%= @order.user.city %>, <%= @order.user.province.name %>, <%= @order.user.postal_code %></p>
+
+  <h3>Items</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price at Purchase</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td><%= item.product.title %></td>
+          <td><%= item.quantity %></td>
+          <td>$<%= item.price_at_purchase %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p><strong>Subtotal:</strong> $<%= @order.subtotal %></p>
+  <p><strong>GST:</strong> $<%= @order.gst_amount %></p>
+  <p><strong>PST:</strong> $<%= @order.pst_amount %></p>
+  <p><strong>HST:</strong> $<%= @order.hst_amount %></p>
+  <p><strong>Total:</strong> $<%= @order.total %></p>
+</div>
