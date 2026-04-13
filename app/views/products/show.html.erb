@@ -1,3 +1,15 @@
+<div class="container mb-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+      <li class="breadcrumb-item">
+        <%= link_to @product.category.name, category_path(@product.category) %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @product.title %></li>
+    </ol>
+  </nav>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-md-6">

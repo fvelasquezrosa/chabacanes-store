@@ -1,7 +1,46 @@
+<div class="container mb-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+      <% if @category.present? %>
+        <li class="breadcrumb-item active" aria-current="page"><%= @category.name %></li>
+      <% end %>
+    </ol>
+  </nav>
+</div>
+
 <div class="container">
   <h1 class="mb-4">
     <%= @category.present? ? "#{@category.name} Products" : "Shop All Products" %>
   </h1>
+
+  <div class="card p-3 mb-4">
+    <%= form_with url: root_path, method: :get, local: true do %>
+      <div class="row g-3">
+        <div class="col-md-5">
+          <%= label_tag :keyword, "Search by Keyword", class: "form-label" %>
+          <%= text_field_tag :keyword, params[:keyword], class: "form-control", placeholder: "Search products..." %>
+        </div>
+
+        <div class="col-md-4">
+          <%= label_tag :category_id, "Category", class: "form-label" %>
+          <%= select_tag :category_id,
+                options_for_select([["All Categories", ""]] + @categories.map { |category| [category.name, category.id] }, params[:category_id]),
+                class: "form-select" %>
+        </div>
+
+        <div class="col-md-3 d-flex align-items-end">
+          <%= submit_tag "Search", class: "btn btn-dark w-100" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3 d-flex gap-2">
+    <%= link_to "All", root_path, class: "btn btn-outline-dark btn-sm" %>
+    <%= link_to "New", root_path(filter: "new"), class: "btn btn-outline-primary btn-sm" %>
+    <%= link_to "Recently Updated", root_path(filter: "recently_updated"), class: "btn btn-outline-secondary btn-sm" %>
+  </div>
 
   <div class="row">
     <% @products.each do |product| %>
