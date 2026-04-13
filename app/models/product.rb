@@ -2,6 +2,9 @@ class Product < ApplicationRecord
   belongs_to :category
   has_one_attached :image
 
+  has_many :product_tags, dependent: :destroy
+  has_many :tags, through: :product_tags
+
   validates :title, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
