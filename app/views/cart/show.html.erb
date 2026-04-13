@@ -47,4 +47,5 @@
   <% end %>
 
   <%= link_to "Continue Shopping", root_path, class: "btn btn-primary" %>
+  <%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-success ms-2" if @cart_items.any? %>
 </div>
