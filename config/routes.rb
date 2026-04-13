@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "orders/show"
+  get "checkout/new"
+  get "checkout/create"
   # Devise (Admin + Users)
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
@@ -18,6 +21,9 @@ Rails.application.routes.draw do
   post "/cart/add/:id", to: "cart#add", as: "add_to_cart"
   patch "/cart/update/:id", to: "cart#update", as: "update_cart"
   delete "/cart/remove/:id", to: "cart#remove", as: "remove_from_cart"
+  get "/checkout", to: "checkout#new", as: "checkout"
+  post "/checkout", to: "checkout#create"
+  get "/orders/:id", to: "orders#show", as: "order"
 
   # Static Pages
   get "/pages/:slug", to: "pages#show", as: "page"
