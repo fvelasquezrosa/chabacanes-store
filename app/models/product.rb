@@ -16,6 +16,14 @@ class Product < ApplicationRecord
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    ["category"]
+    ["category", "product_tags", "tags"]
+  end
+
+  def thumbnail_image
+    image.variant(resize_to_limit: [300, 300]).processed if image.attached?
+  end
+
+  def large_image
+    image.variant(resize_to_limit: [800, 800]).processed if image.attached?
   end
 end
