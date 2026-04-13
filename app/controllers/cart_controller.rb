@@ -1,14 +1,19 @@
 class CartController < ApplicationController
   def show
-    session[:cart] ||= {}
+  session[:cart] ||= {}
 
-    @cart_items = Product.find(session[:cart].keys).map do |product|
-      {
-        product: product,
-        quantity: session[:cart][product.id.to_s]
-      }
-    end
+  valid_products = Product.where(id: session[:cart].keys)
+
+  @cart_items = valid_products.map do |product|
+    {
+      product: product,
+      quantity: session[:cart][product.id.to_s]
+    }
   end
+
+  valid_ids = valid_products.pluck(:id).map(&:to_s)
+  session[:cart].slice!(*valid_ids)
+end
 
   def add
     session[:cart] ||= {}
