@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :title, :description, :price, :stock_quantity, :category_id, :image
+  permit_params :title, :description, :price, :stock_quantity, :category_id, :image, tag_ids: []
 
   config.filters = false
 
@@ -21,6 +21,7 @@ ActiveAdmin.register Product do
       f.input :price
       f.input :stock_quantity
       f.input :category
+      f.input :tags, as: :check_boxes
       f.input :image, as: :file
     end
     f.actions
