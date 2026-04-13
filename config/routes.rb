@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   delete "/cart/remove/:id", to: "cart#remove", as: "remove_from_cart"
   get "/checkout", to: "checkout#new", as: "checkout"
   post "/checkout", to: "checkout#create"
-  get "/orders/:id", to: "orders#show", as: "order"
+  resources :orders, only: [:index, :show]
 
   # Static Pages
   get "/pages/:slug", to: "pages#show", as: "page"
